@@ -77,18 +77,21 @@ public class BatteryService extends Service {
 	private void updateWidgets(int level){
 		AppWidgetManager appmanager = AppWidgetManager.getInstance(this);
 		ComponentName cmpName = new ComponentName(this, SLWBatteryWidget.class);
+		
 		int[] widgetIds=appmanager.getAppWidgetIds(cmpName);
 		int[] green={Color.rgb(0, 200, 0)};
 		int[] red={Color.rgb(200, 0, 0)};
 		int[] yellow={Color.rgb(230, 230, 50)};
 		int[] color;
+		
 		if(level<20){
 			color=red;
 		} else if(level<50) {
 			color=yellow;
-		}else{
+		} else{
 			color=green;
 		}
+		
 		Bitmap onePixel= Bitmap.createBitmap(color, 1, 1, Bitmap.Config.ARGB_8888);
 		Matrix matrix = new Matrix();
 		float currentlevel=(float)level/100*MAXHEIGHT;
@@ -96,7 +99,7 @@ public class BatteryService extends Service {
 		Bitmap manyPixels = Bitmap.createBitmap(onePixel, 0, 0,1, 1, matrix, true); 
 		manyPixels.setDensity(DisplayMetrics.DENSITY_HIGH);
 		for(int wid:widgetIds){
-			RemoteViews rView = new RemoteViews(getPackageName(), R.layout.main);
+			RemoteViews rView = new RemoteViews(getPackageName(),R.layout.main);
 			rView.setTextViewText(R.id.tv, level+"%");
 			rView.setImageViewBitmap(R.id.imageViewBack, manyPixels);
 			appmanager.updateAppWidget(wid, rView);
