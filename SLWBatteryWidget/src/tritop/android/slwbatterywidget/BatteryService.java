@@ -82,9 +82,9 @@ public class BatteryService extends Service {
         int[] red={Color.rgb(200, 0, 0)};
         int[] yellow={Color.rgb(230, 230, 50)};
         int[] color;
-        if(level<90){
+        if(level<20){
         	color=red;
-        } else if(level<95) {
+        } else if(level<50) {
         	color=yellow;
         }else{
         	color=green;
