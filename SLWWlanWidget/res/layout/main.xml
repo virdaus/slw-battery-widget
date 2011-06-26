@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:id="@+id/relativeLayout1" android:layout_height="fill_parent">
+    <LinearLayout android:id="@+id/linearLayout1" android:layout_height="fill_parent" android:layout_width="fill_parent" android:background="@drawable/appwidget_bg" android:orientation="vertical">
+    </LinearLayout>
+    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:src="@drawable/btnscan45" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:id="@+id/imageViewBtn"></ImageView>
+</RelativeLayout>
+
