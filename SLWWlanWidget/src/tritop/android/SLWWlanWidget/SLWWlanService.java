@@ -20,6 +20,7 @@
 package tritop.android.SLWWlanWidget;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.IntentService;
@@ -71,23 +72,24 @@ public class SLWWlanService extends IntentService {
 		AppWidgetManager appmanager = AppWidgetManager.getInstance(this);
 		ComponentName cmpName = new ComponentName(this, SLWWlanWidget.class);
 		int[] widgetIds=appmanager.getAppWidgetIds(cmpName);
-		
 		List<ScanResult> results = wifiMgr.getScanResults();
 		for(int wid:widgetIds){
 			RemoteViews rView = new RemoteViews(getPackageName(),R.layout.main);
 			rView.removeAllViews(R.id.linearLayout1);
 			int cnt=1;
-			for(ScanResult result: results){
-				RemoteViews rViewChannel;
-				if(cnt%2==0){
-					rViewChannel = new RemoteViews(getPackageName(),R.layout.channelline);
+			if(results!=null){
+				for(ScanResult result: results){
+					RemoteViews rViewChannel;
+					if(cnt%2==0){
+						rViewChannel = new RemoteViews(getPackageName(),R.layout.channelline);
+					}
+					else{
+						rViewChannel = new RemoteViews(getPackageName(),R.layout.channellinediff);
+					}
+					rViewChannel.setTextViewText(R.id.channelLine,String.format("Ch: %2d  %2ddb  %s",((result.frequency-2407)/5),result.level,result.SSID));
+					rView.addView(R.id.linearLayout1, rViewChannel);
+					cnt++;
 				}
-				else{
-					rViewChannel = new RemoteViews(getPackageName(),R.layout.channellinediff);
-				}
-				rViewChannel.setTextViewText(R.id.channelLine,String.format("Ch: %2d  %2ddb  %s",((result.frequency-2407)/5),result.level,result.SSID));
-				rView.addView(R.id.linearLayout1, rViewChannel);
-				cnt++;
 			}
 			Intent btn_intent = new Intent(INTENT_FLIP_SWITCH);
 			btn_intent.putExtra("FLIP_SWITCH", 1);
