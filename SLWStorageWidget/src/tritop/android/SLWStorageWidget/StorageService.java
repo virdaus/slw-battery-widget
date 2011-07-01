@@ -22,27 +22,24 @@ package tritop.android.SLWStorageWidget;
 
 
 import android.app.PendingIntent;
-import android.app.Service;
+import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Environment;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.RemoteViews;
 import 	android.os.StatFs;
 
 
 
 
-public class StorageService extends Service {
-	BroadcastReceiver bReceiver=null;
-	public static final String REFRESH_INTENT="tritop.android.storagewidget.action.refresh";
+public class StorageService extends IntentService {
+	public static final String REFRESH_INTENT="tritop.android.storagewidget.action.REFRESH";
 	
-	
+	public StorageService() {
+		super("StorageService");
+	}	
 
 	
 	@Override
@@ -50,27 +47,6 @@ public class StorageService extends Service {
 		return null;
 	}
 
-	
-	@Override
-	public void onCreate() {
-		bReceiver = new BroadcastReceiver() {
-	        @Override
-	        public void onReceive(Context context, Intent intent) {
-	            updateWidgets();
-	        }
-	    };
-	    IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-	    registerReceiver(bReceiver, filter);
-	    filter = new IntentFilter(REFRESH_INTENT);
-	    registerReceiver(bReceiver, filter);
-	}
-
-
-	@Override
-	public void onDestroy() {
-		unregisterReceiver(bReceiver);
-		super.onDestroy();
-	}
 
 	
 	private void updateWidgets(){
@@ -107,7 +83,7 @@ public class StorageService extends Service {
 		for(int wid:widgetIds){
 			RemoteViews rView = new RemoteViews(getPackageName(),R.layout.main);
 			Intent intent = new Intent(REFRESH_INTENT);
-			PendingIntent pendingInt = PendingIntent.getBroadcast(this, 99, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+			PendingIntent pendingInt = PendingIntent.getBroadcast(this, 99, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 			rView.setOnClickPendingIntent(R.id.relativeLayoutRoot, pendingInt);
 			rView.setTextViewText(R.id.tv_left, sdCard);
 			rView.setTextViewText(R.id.tv_right, internal);
@@ -117,8 +93,10 @@ public class StorageService extends Service {
 
 
 	@Override
-	public void onStart(Intent intent, int startId) {
-		super.onStart(intent, startId);
+	protected void onHandleIntent(Intent arg0) {
+		updateWidgets();
 	}
+
+
 
 }
