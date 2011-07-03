@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="tritop.androidSLWCpuWidget"
-      android:versionCode="2"
-      android:versionName="1.1">
+      android:versionName="1.2" android:versionCode="3">
     <uses-sdk android:minSdkVersion="7" />
     <application android:icon="@drawable/cpuwidget_icon" android:label="@string/app_name">
         <receiver android:name="SLWCpuWidget">
@@ -13,5 +12,10 @@
                android:resource="@xml/cpuwidget" />
     	</receiver>
         <service android:name="CpuService"></service>
+        <receiver android:name="CpuReceiver">
+            <intent-filter>
+                <action android:name="tritop.android.cpuwidget.action.REFRESH"></action>
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>
