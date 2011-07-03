@@ -19,26 +19,36 @@
  */
 package tritop.androidSLWCpuWidget;
 
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 
 public class SLWCpuWidget extends AppWidgetProvider {
-
+	public static final int UPDATETIME=1;
+	
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,int[] appWidgetIds) {
-		
-	}
-
-	@Override
-	public void onEnabled(Context context) {
 		context.startService(new Intent(context,CpuService.class));
 	}
 
 	@Override
+	public void onEnabled(Context context) {
+		Intent intent = new Intent(CpuService.REFRESH_INTENT);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 234567, intent, 0);
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+		alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), 1000*60*UPDATETIME, pendingIntent);
+	}
+
+	@Override
 	public void onDisabled(Context context) {
-		context.stopService(new Intent(context,CpuService.class));
+		Intent intent = new Intent(CpuService.REFRESH_INTENT);
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 234567, intent, 0);
+		AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
 	}
 
 }

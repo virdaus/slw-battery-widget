@@ -25,25 +25,28 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import android.app.IntentService;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.appwidget.AppWidgetManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.widget.RemoteViews;
 
-public class CpuService extends Service {
-	BroadcastReceiver bReceiver=null;
+public class CpuService extends IntentService {
+
 	private final static int MAXHEIGHT=65;
-	public static final String REFRESH_INTENT="tritop.android.cpuwidget.action.refresh";
+	public static final String REFRESH_INTENT="tritop.android.cpuwidget.action.REFRESH";
+	
+	public CpuService() {
+		super("CpuService");
+	}
+
 	
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -51,34 +54,13 @@ public class CpuService extends Service {
 	}
 
 	
+	
 	@Override
-	public void onCreate() {
-		bReceiver = new BroadcastReceiver() {
-	        @Override
-	        public void onReceive(Context context, Intent intent) {
-	            updateWidgets();
-	        }
-	    };
-	    IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-	    registerReceiver(bReceiver, filter);
-	    filter = new IntentFilter(REFRESH_INTENT);
-	    registerReceiver(bReceiver, filter);
+	protected void onHandleIntent(Intent arg0) {
+		updateWidgets();
 	}
 
 
-	@Override
-	public void onDestroy() {
-		unregisterReceiver(bReceiver);
-		super.onDestroy();
-	}
-
-	
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		return START_STICKY;
-	}
-	
-	
 	private void updateWidgets(){
 		AppWidgetManager appmanager = AppWidgetManager.getInstance(this);
 		ComponentName cmpName = new ComponentName(this, SLWCpuWidget.class);
@@ -90,7 +72,7 @@ public class CpuService extends Service {
 		int[] color;
 		int level = 0;
 		
-		String line="NIX";
+		String line="NIX_UND_NET_NULL";
 		try {
 			Process process = new ProcessBuilder()
 			   .command("/system/bin/top")
@@ -130,7 +112,7 @@ public class CpuService extends Service {
 		for(int wid:widgetIds){
 			RemoteViews rView = new RemoteViews(getPackageName(),R.layout.main);
 			Intent intent = new Intent(REFRESH_INTENT);
-			PendingIntent pendingInt = PendingIntent.getBroadcast(this, 99, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+			PendingIntent pendingInt = PendingIntent.getBroadcast(this, 99, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 			rView.setOnClickPendingIntent(R.id.relativeLayoutRoot, pendingInt);
 			rView.setTextViewText(R.id.tv, level+"%");
 			rView.setImageViewBitmap(R.id.imageViewBack, manyPixels);
