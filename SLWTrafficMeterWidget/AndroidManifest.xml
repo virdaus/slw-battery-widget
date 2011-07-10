@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="tritop.android.SLWTrafficMeterWidget"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="7" />
+
+    <application android:label="@string/app_name" android:icon="@drawable/icontrafficwidget">
+        <receiver android:name="SLWTrafficMeterWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"></action>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/trafficmeterwidget" />
+        </receiver>
+        <receiver android:name="TrafficMeterReceiver">
+        <intent-filter>
+                <action android:name="tritop.android.slwtrafficmeterwidget.REFRESH"></action>
+                <action android:name="tritop.android.slwtrafficmeterwidget.RESET"></action>
+                <action android:name="tritop.android.slwtrafficmeterwidget.SWITCH"></action>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN"></action>
+            </intent-filter>
+        </receiver>
+        <service android:name="TrafficMeterService"></service>
+
+
+    </application>
+</manifest>
