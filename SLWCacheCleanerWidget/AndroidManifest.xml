@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="tritop.android.SLWCacheCleanerWidget"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <uses-sdk android:minSdkVersion="4" />
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"></uses-permission>
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE"></uses-permission>
+
+    <application android:label="@string/app_name" android:icon="@drawable/cachecleaner">
+        <receiver android:name="SLWCacheCleanerWidget">
+        <intent-filter>
+        	<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+    	</intent-filter>
+    	<meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/cachecleanerwidget" />
+        </receiver>
+        <receiver android:name="CacheCleanerReceiver">
+            <intent-filter>
+                <action android:name="tritop.android.slwcachecleanerwidget.REFRESH"></action>
+                <action android:name="tritop.android.slwcachecleanerwidget.CLEAR"></action>
+            </intent-filter>
+        </receiver>
+        <service android:name="CacheCleanerService"></service>
+
+
+    </application>
+</manifest>
