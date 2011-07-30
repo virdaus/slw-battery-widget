@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with Simple Lightweight Battery Widget.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Simple Lightweight Storage Widget.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
 package tritop.android.SLWStorageWidget;
