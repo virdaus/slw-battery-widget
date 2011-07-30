@@ -22,6 +22,7 @@ package tritop.android.SLWStorageWidget;
 
 
 
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -34,7 +35,7 @@ public class SLWStorageWidget extends AppWidgetProvider {
 
 	@Override
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager,int[] appWidgetIds) {
-		
+		context.startService(new Intent(context,StorageService.class));
 	}
 
 	@Override
