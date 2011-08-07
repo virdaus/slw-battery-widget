@@ -22,10 +22,13 @@ package tritop.android.SLWGpsWidget;
 
 
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
@@ -117,7 +120,8 @@ public class SLWGpsService extends Service {
 			stopSelf();
 		}
 		
-		if(!intent.getBooleanExtra("Init", false)){
+		if( intent != null && !intent.getBooleanExtra("Init", false)){
+			setupNotification();
 			locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locListener);
 			locMan.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
 			locMan.addGpsStatusListener(gpslistener);
@@ -126,9 +130,10 @@ public class SLWGpsService extends Service {
 		
 		updateWidgets();
 		
-		if(intent.getBooleanExtra("Init", false)){
+		if( intent!=null && intent.getBooleanExtra("Init", false)){
 			stopSelf();
 		}
+		
 		return super.onStartCommand(intent, flags, startId);
 	}
 
@@ -156,6 +161,14 @@ public class SLWGpsService extends Service {
 		updateWidgets();
 	}
 
+	private void setupNotification(){
+		Notification nInfo= new Notification(R.drawable.notificationicon,"SLW GPS Widget active",System.currentTimeMillis());
+		Intent btn_intent = new Intent(SWITCH_INTENT);
+		PendingIntent pendingInt = PendingIntent.getBroadcast(this, 999, btn_intent, PendingIntent.FLAG_CANCEL_CURRENT);
+		nInfo.setLatestEventInfo(this, "SLW GPS", "Widget active", pendingInt);
+		startForeground(4567, nInfo);
+	}
+	
 	private void updateWidgets(){
 		AppWidgetManager appmanager = AppWidgetManager.getInstance(this);
 		ComponentName cmpName = new ComponentName(this, SLWGpsWidget.class);
@@ -170,7 +183,6 @@ public class SLWGpsService extends Service {
 			}
 			rView.setTextViewText(R.id.textViewBottomRight, String.format("%1d/%1d", mFixSatCount,mTotalSatCount));
 			Intent btn_intent = new Intent(SWITCH_INTENT);
-			btn_intent.putExtra("FLIP_SWITCH", 1);
 			PendingIntent pendingInt = PendingIntent.getBroadcast(this, 99, btn_intent, PendingIntent.FLAG_CANCEL_CURRENT);
 			rView.setOnClickPendingIntent(R.id.relativeLayout_base, pendingInt);
 			appmanager.updateAppWidget(wid, rView);
