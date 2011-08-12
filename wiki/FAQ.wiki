@@ -1,4 +1,4 @@
 = FAQ =
 
-*_Why is the project called slw battery widget?_*<br>
-It all started with this widget. I was just to lazy to open a new project for each widget.
+*_Why is the project called slw battery widget?_* <br>
+Iwas the first widget in the dream team. So the project keeped the name.
