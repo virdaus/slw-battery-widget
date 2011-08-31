@@ -3,3 +3,6 @@
 *_Why is the project called slw battery widget?_* <br>
 
 It was the first widget in the dream team. So the project keeped the name.
+
+*_What devices are used for testing the widgets?_* <br>
+I'm using a HTC Hero( 2.2.1 Froyd villain 1.7.1) and a Nexus S(stock rom) for testing.
