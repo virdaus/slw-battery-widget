@@ -100,6 +100,7 @@ public class CacheCleanerService extends Service {
 		mInstPkg= mPM.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES |
 	               PackageManager.GET_DISABLED_COMPONENTS);
 		mPM.freeStorageAndNotify(Integer.MAX_VALUE, mClearObs);
+		mPM.freeStorageAndNotify(Long.MAX_VALUE, mClearObs);
 		mHandler.postDelayed(mTriggerCount, RECOUNTNDELAY);
 	}
 	
