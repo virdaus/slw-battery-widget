@@ -2,7 +2,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/relativeLayoutRoot" android:layout_height="fill_parent" android:layout_width="fill_parent">
         <LinearLayout android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="true" android:layout_height="fill_parent" android:id="@+id/linearLayoutContainer" android:orientation="vertical" android:layout_alignParentBottom="true" android:gravity="bottom">
             <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout2" android:layout_height="fill_parent" android:gravity="bottom">
-                <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageViewBack" android:layout_alignParentBottom="true" android:layout_marginBottom="22dip" android:layout_marginLeft="12dip"></ImageView>
+                <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageViewBack" android:layout_alignParentBottom="true" android:layout_marginLeft="14dip" android:layout_marginBottom="20dip"></ImageView>
                 <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageViewCpu" android:layout_alignParentBottom="true" android:src="@drawable/cpuwidget"></ImageView>
             </RelativeLayout>
         </LinearLayout>

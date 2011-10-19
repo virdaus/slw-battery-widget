@@ -40,7 +40,7 @@ import android.widget.RemoteViews;
 
 public class CpuService extends IntentService {
 
-	private final static int MAXHEIGHT=65;
+	private final static int MAXHEIGHT=70;
 	public static final String REFRESH_INTENT="tritop.android.cpuwidget.action.REFRESH";
 	
 	public CpuService() {
@@ -106,7 +106,7 @@ public class CpuService extends IntentService {
 		Matrix matrix = new Matrix();
 		float currentlevel=(float)level/100*MAXHEIGHT;
 		if(currentlevel<1){currentlevel=1;}
-		matrix.postScale(20, currentlevel);
+		matrix.postScale(25, currentlevel);
 		Bitmap manyPixels = Bitmap.createBitmap(onePixel, 0, 0,1, 1, matrix, true); 
 		manyPixels.setDensity(DisplayMetrics.DENSITY_HIGH);
 		for(int wid:widgetIds){
