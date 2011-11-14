@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:id="@+id/mainLinearLayout" android:layout_height="80dip" android:background="@drawable/sowas_wie_metall" android:layout_width="240dip" android:clickable="true">
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/relativeLayoutAlarm">
+        <TextView android:id="@+id/textViewAlarmRaise" android:text="+" style="@style/raise_style"></TextView>
+        <ImageView android:id="@+id/imageViewAlarmBack" style="@style/image_stylebg" android:layout_above="@+id/textViewAlarmLower"></ImageView>
+        <ImageView android:id="@+id/imageView12" android:src="@drawable/symbol_alarm_3pxbrd" style="@style/image_style"></ImageView>
+        <TextView android:id="@+id/textViewAlarmLower" android:text="-" style="@style/lower_style"></TextView>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/relativeLayoutMusic">
+        <TextView android:id="@+id/textViewMusicRaise" android:text="+" style="@style/raise_style"></TextView>
+        <ImageView android:id="@+id/imageViewMusicBack" style="@style/image_stylebg" android:layout_above="@+id/textViewMusicLower"></ImageView>
+        <ImageView android:id="@+id/imageView10" android:src="@drawable/symbol_music_3pxbrd" style="@style/image_style"></ImageView>
+        <TextView android:id="@+id/textViewMusicLower" android:text="-" style="@style/lower_style"></TextView>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/relativeLayoutNotification">
+        <TextView android:id="@+id/textViewNotificationRaise" android:text="+" style="@style/raise_style"></TextView>
+        <ImageView android:id="@+id/imageViewNotificationBack" style="@style/image_stylebg" android:layout_above="@+id/textViewNotificationLower"></ImageView>
+        <ImageView android:id="@+id/imageView8" android:src="@drawable/symbol_notification_3pxbrd" style="@style/image_style"></ImageView>
+        <TextView android:id="@+id/textViewNotificationLower" android:text="-" style="@style/lower_style"></TextView>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/relativeLayoutRing">
+        <TextView android:id="@+id/textViewRingRaise" android:text="+" style="@style/raise_style"></TextView>
+        <ImageView android:id="@+id/imageViewRingBack" style="@style/image_stylebg" android:layout_above="@+id/textViewRingLower"></ImageView>
+        <ImageView android:id="@+id/imageView6" android:src="@drawable/symbol_ring_3pxbrd" style="@style/image_style"></ImageView>
+        <TextView android:id="@+id/textViewRingLower" android:text="-" style="@style/lower_style"></TextView>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/relativeLayoutSystem">
+        <TextView android:id="@+id/textViewSystemRaise" android:text="+" style="@style/raise_style"></TextView>
+        <ImageView android:id="@+id/imageViewSystemBack" style="@style/image_stylebg" android:layout_above="@+id/textViewSystemLower"></ImageView>
+        <ImageView android:id="@+id/imageView4" android:src="@drawable/symbol_system_3pxbrd" style="@style/image_style"></ImageView>
+        <TextView android:id="@+id/textViewSystemLower" android:text="-" style="@style/lower_style"></TextView>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1" android:id="@+id/relativeLayoutVoice">
+        <TextView android:id="@+id/textViewVoiceRaise" android:text="+" style="@style/raise_style"></TextView>
+        <ImageView android:id="@+id/imageViewVoiceBack" style="@style/image_stylebg" android:layout_above="@+id/textViewVoiceLower"></ImageView>
+        <ImageView android:id="@+id/imageView2" android:src="@drawable/symbol_voice_3pxbrd" style="@style/image_style"></ImageView>
+        <TextView android:id="@+id/textViewVoiceLower" android:text="-" style="@style/lower_style"></TextView>
+    </RelativeLayout>
+</LinearLayout>
