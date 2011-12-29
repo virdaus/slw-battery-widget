@@ -100,7 +100,7 @@ public class AudioVolumeService extends IntentService {
 				Matrix matrix = new Matrix();
 				float currentlevel=(float)mAudioLevel[i]/mMaxAudioLevel[i]*MAXHEIGHT;
 				if(currentlevel<1){currentlevel=1;}
-				matrix.postScale(50, currentlevel);
+				matrix.postScale(55, currentlevel);
 				Bitmap manyPixels = Bitmap.createBitmap(onePixel, 0, 0,1, 1, matrix, true); 
 				manyPixels.setDensity(DisplayMetrics.DENSITY_HIGH);
 				Intent raiseIntent = new Intent(ADJUST_INTENT);
