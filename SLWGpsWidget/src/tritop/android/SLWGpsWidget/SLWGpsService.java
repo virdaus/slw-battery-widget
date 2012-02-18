@@ -43,14 +43,14 @@ import android.widget.RemoteViews;
 public class SLWGpsService extends Service {
 	
 	public static final String SWITCH_INTENT="tritop.android.slwgpswidget.SWITCH";
-	private boolean isRunning;
+	private boolean isRunning,isGPSenabled;
 	private LocationManager locMan;
 	private LocationListener locListener;
 	private GpsStatus.Listener gpslistener;
 	private double mLat,mLon,mAlt,mAcc;
 	private boolean mFix=false;
 	private int mTotalSatCount,mFixSatCount;
-	
+	private String mGPSDisabled1,mGPSDisabled2;
 	@Override
 	public IBinder onBind(Intent arg0) {
 		return null;
@@ -59,7 +59,10 @@ public class SLWGpsService extends Service {
 	@Override
 	public void onCreate() {
 			isRunning=false;
+			isGPSenabled=false;
 			mAcc=999.0d;
+			mGPSDisabled1 = this.getString(R.string.gps_disabled1);
+			mGPSDisabled2 = this.getString(R.string.gps_disabled2);
 			locMan = (LocationManager) getSystemService(LOCATION_SERVICE);
 			locListener = new LocationListener(){
 
@@ -120,6 +123,8 @@ public class SLWGpsService extends Service {
 			stopSelf();
 		}
 		
+		
+		
 		if( intent != null && !intent.getBooleanExtra("Init", false)){
 			setupNotification();
 			locMan.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locListener);
@@ -170,12 +175,22 @@ public class SLWGpsService extends Service {
 	}
 	
 	private void updateWidgets(){
+		isGPSenabled = locMan.isProviderEnabled(LocationManager.GPS_PROVIDER);
 		AppWidgetManager appmanager = AppWidgetManager.getInstance(this);
 		ComponentName cmpName = new ComponentName(this, SLWGpsWidget.class);
 		int[] widgetIds=appmanager.getAppWidgetIds(cmpName);
 		for(int wid:widgetIds){
 			RemoteViews rView = new RemoteViews(getPackageName(),R.layout.main);
-			if(mFix){
+			if(!isGPSenabled){
+				rView.setTextViewText(R.id.textViewTopLeft, mGPSDisabled1 );
+				rView.setTextViewText(R.id.textViewTopMiddle, "");
+				rView.setTextViewText(R.id.textViewTopRight, mGPSDisabled2);
+			}
+			else if(isGPSenabled && !mFix){
+				rView.setTextViewText(R.id.textViewTopLeft, "");
+				rView.setTextViewText(R.id.textViewTopRight, "");
+			}
+			else if(mFix){
 					rView.setTextViewText(R.id.textViewTopLeft, String.format("%3.3f", mLat));
 					rView.setTextViewText(R.id.textViewTopMiddle, String.format("%4.0f", mAlt));
 					rView.setTextViewText(R.id.textViewTopRight, String.format("%3.3f", mLon));
