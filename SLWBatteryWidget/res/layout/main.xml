@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/relativeLayout1" android:layout_height="fill_parent" android:layout_width="fill_parent">
         <LinearLayout android:layout_width="wrap_content" android:layout_centerHorizontal="true" android:layout_centerVertical="true" android:layout_height="fill_parent" android:id="@+id/linearLayoutContainer" android:orientation="vertical" android:layout_alignParentBottom="true" android:gravity="bottom">
-            <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout2" android:layout_height="fill_parent" android:gravity="bottom">
-                <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageViewBack" android:layout_alignParentBottom="true" android:layout_marginBottom="5dip" android:layout_marginLeft="5dip"></ImageView>
+            <RelativeLayout android:layout_width="fill_parent" android:id="@+id/relativeLayout2" android:layout_height="fill_parent">
+
+                <ImageView
+                    android:id="@+id/imageViewBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dip"
+                    android:layout_marginLeft="5dip" android:layout_alignParentBottom="true">
+</ImageView>
                 <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/imageViewBattery" android:src="@drawable/battery" android:layout_alignParentBottom="true"></ImageView>
             </RelativeLayout>
         </LinearLayout>
