@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, SLWRecentlyStartedWidgetActivity!</string>
     <string name="app_name">SLW App History Widget</string>
-
+<string name="infowidget">This App is a widget. You have to install the widget on your homescreen. Now you just started a information app, which tells you, you are doing it wrong :-)</string>
+    
 </resources>
