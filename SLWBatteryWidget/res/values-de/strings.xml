@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SLW Battery Widget</string>
+    <string name="infowidget">Dieses Programm ist ein Widget. Sie müssen das Widget auf Ihrem Homescreen platzieren. Wenn Sie das hier lesen, dann sind Sie auf dem Holzweg :-)</string>
+</resources>

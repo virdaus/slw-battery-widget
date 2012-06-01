@@ -95,6 +95,7 @@ public class BatteryService extends Service {
 		Bitmap onePixel= Bitmap.createBitmap(color, 1, 1, Bitmap.Config.ARGB_8888);
 		Matrix matrix = new Matrix();
 		float currentlevel=(float)level/100*MAXHEIGHT;
+		if(currentlevel<1){currentlevel=1;}
 		matrix.postScale(50, currentlevel);
 		Bitmap manyPixels = Bitmap.createBitmap(onePixel, 0, 0,1, 1, matrix, true); 
 		manyPixels.setDensity(DisplayMetrics.DENSITY_HIGH);
