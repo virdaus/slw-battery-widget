@@ -3,4 +3,5 @@
     <string name="app_name">SLW Traffic Meter Widget</string>
     <string name="button_reset">reset</string>
     <string name="button_switch">switch</string>
+    <string name="infowidget">This App is a widget. You have to install the widget on your homescreen. Now you just started a information app, which tells you, you are doing it wrong :-)</string>
 </resources>
