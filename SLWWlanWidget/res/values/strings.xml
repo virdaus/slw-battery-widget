@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SLW Wlan Scan Widget</string>
+    <string name="infowidget">This App is a widget. You have to install the widget on your homescreen. Now you just started a information app, which tells you, you are doing it wrong :-)</string>
 </resources>
