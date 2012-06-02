@@ -11,6 +11,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 public class TrafficMeterService extends IntentService {
@@ -162,8 +163,14 @@ public class TrafficMeterService extends IntentService {
 			display+=mPref.getLong("WIFIEXTRA", 0);
 		}
 		
+		//we missed a shutdown
+		if(display<0){
+			restoreData();
+			Log.e("SLW Traffic meter WIDGET","error");
+		}
+		
 		int cnt=0;
-		while(display>1024){
+		while(display>1024 && cnt<2){
 			display/=1024;
 			cnt++;
 		}
