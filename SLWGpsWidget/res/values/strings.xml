@@ -3,4 +3,6 @@
     <string name="app_name">SLW Gps Widget</string>
     <string name="gps_disabled1">GPS</string>
     <string name="gps_disabled2">disabled</string>
+    <string name="infowidget">This App is a widget. You have to install the widget on your homescreen. Now you just started a information app, which tells you, you are doing it wrong :-)</string>
+    
 </resources>
